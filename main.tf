@@ -71,13 +71,16 @@ resource "google_compute_instance_group_manager" "default" {
 
   base_instance_name = "${var.name}"
 
-  instance_template = "${google_compute_instance_template.default.self_link}"
+  version {
+    name              = "default"
+    instance_template = "${google_compute_instance_template.default.self_link}"
+  }
 
   zone = "${var.zone}"
 
-  update_strategy = "${var.update_strategy}"
+  # update_strategy = "${var.update_strategy}"
 
-  rolling_update_policy = ["${var.rolling_update_policy}"]
+  # rolling_update_policy = ["${var.rolling_update_policy}"]
 
   target_pools = ["${var.target_pools}"]
 
